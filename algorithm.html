@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Algorithms - StyleInspire</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #6d5d6e;
+            --secondary: #4f4557;
+            --accent: #f4eee0;
+            --light: #f8f5f1;
+            --dark: #393646;
+            --success: #4CAF50;
+            --warning: #FF9800;
+            --info: #2196F3;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: var(--accent);
+            padding: 1rem 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 1.5rem;
+        }
+        
+        .nav-links a {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 0.5rem 0.8rem;
+            border-radius: 4px;
+        }
+        
+        .nav-links a:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        .nav-links a.active {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        .page-hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+                        url('https://images.unsplash.com/photo-1555949963-aa79dcee981c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80') no-repeat center center/cover;
+            height: 30vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            margin-bottom: 3rem;
+        }
+        
+        .page-hero h1 {
+            font-size: 3rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .page-hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 1rem auto 0;
+            opacity: 0.9;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--secondary);
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background-color: var(--primary);
+            margin: 0.5rem auto;
+        }
+        
+        /* Algorithm Grid */
+        .algorithm-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+        
+        .algorithm-card {
+            background-color: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .algorithm-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .card-header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: var(--accent);
+            padding: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .card-header i {
+            font-size: 1.5rem;
+        }
+        
+        .card-header h3 {
+            font-size: 1.3rem;
+        }
+        
+        .card-body {
+            padding: 1.5rem;
+        }
+        
+        .algorithm-description {
+            margin-bottom: 1.5rem;
+            color: var(--dark);
+        }
+        
+        .code-tabs {
+            display: flex;
+            border-bottom: 1px solid #e0e0e0;
+            margin-bottom: 1rem;
+        }
+        
+        .code-tab {
+            padding: 0.7rem 1rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border-bottom: 3px solid transparent;
+        }
+        
+        .code-tab.active {
+            color: var(--primary);
+            border-bottom: 3px solid var(--primary);
+        }
+        
+        .code-container {
+            background: #2d3748;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .code-content {
+            display: none;
+            padding: 1.5rem;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        
+        .code-content.active {
+            display: block;
+        }
+        
+        .pseudocode {
+            color: #e2e8f0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            white-space: pre-wrap;
+        }
+        
+        .python-code {
+            color: #e2e8f0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            white-space: pre-wrap;
+        }
+        
+        footer {
+            background-color: var(--secondary);
+            color: var(--accent);
+            padding: 2rem 0;
+            text-align: center;
+            margin-top: 4rem;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .footer-links {
+            display: flex;
+            list-style: none;
+            margin: 1.5rem 0;
+        }
+        
+        .footer-links li {
+            margin: 0 1rem;
+        }
+        
+        .footer-links a {
+            color: var(--accent);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .page-hero h1 {
+                font-size: 2rem;
+            }
+            
+            .algorithm-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">StyleInspire</div>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="casual.html">Casual</a></li>
+                    <li><a href="vintage.html">Vintage</a></li>
+                    <li><a href="streetwear.html">Streetwear</a></li>
+                    <li><a href="formal.html">Formal</a></li>
+                    <li><a href="algorithm.html" class="active">Algorithms</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="page-hero">
+        <div class="container">
+            <h1>Algorithm Implementation</h1>
+            <p>Explore 10 essential algorithms with pseudocode and Python implementations</p>
+        </div>
+    </section>
+
+    <section class="algorithms">
+        <div class="container">
+            <h2 class="section-title">All Algorithms</h2>
+            <div class="algorithm-grid">
+                
+                <div class="algorithm-card">
+                    <div class="card-header">
+                        <i class="fas fa-search"></i>
+                        <h3>Search Algorithm</h3>
+                    </div>
+                    <div class="card-body">
+                        
+                        <div class="code-tabs">
+                            <button class="code-tab active" data-tab="pseudocode-1">Pseudocode</button>
+                            <button class="code-tab" data-tab="python-1">Python</button>
+                        </div>
+                        
+                        <div class="code-container">
+                            <div class="code-content active" id="pseudocode-1">
+                                <div class="pseudocode">
+BEGIN SearchOutfits(query, outfits)
+    INPUT query FROM user
+    INPUT outfits list
+    results = []
+    
+    FOR EACH outfit IN outfits
+        IF outfit.title CONTAINS query OR 
+           ANY tag IN outfit.tags CONTAINS query
+            ADD outfit TO results
+        END IF
+    END FOR
+    
+    RETURN results
+END SearchOutfits
+                                </div>
+                            </div>
+                            <div class="code-content" id="python-1">
+                                <div class="python-code">
+def search_outfits(query, outfits):
+    results = []
+    query = query.lower()
+    
+    for outfit in outfits:
+        if query in outfit['title'].lower():
+            results.append(outfit)
+        else:
+            for tag in outfit['tags']:
+                if query in tag.lower():
+                    results.append(outfit)
+                    break
+                    
+    return results
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="algorithm-card">
+                    <div class="card-header">
+                        <i class="fas fa-sort"></i>
+                        <h3>Sort Algorithm</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="code-tabs">
+                            <button class="code-tab active" data-tab="pseudocode-2">Pseudocode</button>
+                            <button class="code-tab" data-tab="python-2">Python</button>
+                        </div>
+                        
+                        <div class="code-container">
+                            <div class="code-content active" id="pseudocode-2">
+                                <div class="pseudocode">
+BEGIN SortOutfitsByRating(outfits)
+    n = LENGTH(outfits)
+    
+    FOR i = 0 TO n-1
+        FOR j = 0 TO n-i-2
+            IF outfits[j].rating < outfits[j+1].rating
+                SWAP outfits[j] AND outfits[j+1]
+            END IF
+        END FOR
+    END FOR
+    
+    RETURN outfits
+END SortOutfitsByRating
+                                </div>
+                            </div>
+                            <div class="code-content" id="python-2">
+                                <div class="python-code">
+def sort_outfits_by_rating(outfits):
+    n = len(outfits)
+    
+    for i in range(n):
+        for j in range(0, n-i-1):
+            if outfits[j]['rating'] < outfits[j+1]['rating']:
+                outfits[j], outfits[j+1] = outfits[j+1], outfits[j]
+                
+    return outfits
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="algorithm-card">
+                    <div class="card-header">
+                        <i class="fas fa-filter"></i>
+                        <h3>Filter Algorithm</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="code-tabs">
+                            <button class="code-tab active" data-tab="pseudocode-3">Pseudocode</button>
+                            <button class="code-tab" data-tab="python-3">Python</button>
+                        </div>
+                        
+                        <div class="code-container">
+                            <div class="code-content active" id="pseudocode-3">
+                                <div class="pseudocode">
+BEGIN FilterOutfits(outfits, style, minRating)
+    filtered = []
+    
+    FOR EACH outfit IN outfits
+        IF (outfit.style == style OR style == "All") 
+           AND outfit.rating >= minRating
+            ADD outfit TO filtered
+        END IF
+    END FOR
+    
+    RETURN filtered
+END FilterOutfits
+                                </div>
+                            </div>
+                            <div class="code-content" id="python-3">
+                                <div class="python-code">
+def filter_outfits(outfits, style, min_rating):
+    filtered = []
+    
+    for outfit in outfits:
+        if (outfit['style'] == style or style == "All") and outfit['rating'] >= min_rating:
+            filtered.append(outfit)
+            
+    return filtered
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="algorithm-card">
+                    <div class="card-header">
+                        <i class="fas fa-calculator"></i>
+                        <h3>Average Rating</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="code-tabs">
+                            <button class="code-tab active" data-tab="pseudocode-4">Pseudocode</button>
+                            <button class="code-tab" data-tab="python-4">Python</button>
+                        </div>
+                        
+                        <div class="code-container">
+                            <div class="code-content active" id="pseudocode-4">
+                                <div class="pseudocode">
+BEGIN CalculateAverageRating(outfits)
+    total = 0
+    count = 0
+    
+    FOR EACH outfit IN outfits
+        total = total + outfit.rating
+        count = count + 1
+    END FOR
+    
+    IF count > 0 THEN
+        average = total / count
+        RETURN average
+    ELSE
+        RETURN 0
+    END IF
+END CalculateAverageRating
+                                </div>
+                            </div>
+                            <div class="code-content" id="python-4">
+                                <div class="python-code">
+def calculate_average_rating(outfits):
+    if not outfits:
+        return 0
+        
+    total = sum(outfit['rating'] for outfit in outfits)
+    return total / len(outfits)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="algorithm-card">
+                    <div class="card-header">
+                        <i class="fas fa-lightbulb"></i>
+                        <h3>Recommendation Algorithm</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="code-tabs">
+                            <button class="code-tab active" data-tab="pseudocode-5">Pseudocode</button>
+                            <button class="code-tab" data-tab="python-5">Python</button>
+                        </div>
+                        
+                        <div class="code-container">
+                            <div class="code-content active" id="pseudocode-5">
+                                <div class="pseudocode">
+BEGIN RecommendOutfits(outfits, userPreferences)
+    recommendations = []
+    
+    FOR EACH outfit IN outfits
+        score = 0
+        
+        IF outfit.season IN userPreferences.seasons
+            score = score + 2
+        END IF
+        
+        IF outfit.rating >= 4.5
+            score = score + 1
+        END IF
+        
+        IF ANY tag IN outfit.tags IN userPreferences.tags
+            score = score + 1
+        END IF
+        
+        IF score >= 2
+            ADD outfit TO recommendations
+        END IF
+    END FOR
+    
+    RETURN recommendations
+END RecommendOutfits
+                                </div>
+                            </div>
+                            <div class="code-content" id="python-5">
+                                <div class="python-code">
+def recommend_outfits(outfits, user_preferences):
+    recommendations = []
+    
+    for outfit in outfits:
+        score = 0
+        
+        if outfit['style'] in user_preferences['style']:
+            score += 2
+            
+        if outfit['rating'] >= 4.5:
+            score += 1
+            
+        for tag in outfit['tags']:
+            if tag in user_preferences['tags']:
+                score += 1
+                break
+                
+        if score >= 2:
+            recommendations.append(outfit)
+            
+    return recommendations
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="algorithm-card">
+                    <div class="card-header">
+                        <i class="fas fa-chart-line"></i>
+                        <h3>Trending Algorithm</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="code-tabs">
+                            <button class="code-tab active" data-tab="pseudocode-6">Pseudocode</button>
+                            <button class="code-tab" data-tab="python-6">Python</button>
+                        </div>
+                        
+                        <div class="code-container">
+                            <div class="code-content active" id="pseudocode-6">
+                                <div class="pseudocode">
+BEGIN FindTrendingOutfits(outfits)
+    trending = []
+    
+    FOR EACH outfit IN outfits
+        IF outfit.rating >= 4.7 AND outfit.views > 1000
+            ADD outfit TO trending
+        END IF
+    END FOR
+    
+    SORT trending BY rating DESC
+    RETURN trending
+END FindTrendingOutfits
+                                </div>
+                            </div>
+                            <div class="code-content" id="python-6">
+                                <div class="python-code">
+def find_trending_outfits(outfits):
+    trending = []
+    
+    for outfit in outfits:
+        if outfit['rating'] >= 4.7 and outfit['views'] > 1000:
+            trending.append(outfit)
+            
+    # Sort by rating descending
+    trending.sort(key=lambda x: x['rating'], reverse=True)
+    return trending
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="algorithm-card">
+                    <div class="card-header">
+                        <i class="fas fa-random"></i>
+                        <h3>Shuffle Algorithm</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="code-tabs">
+                            <button class="code-tab active" data-tab="pseudocode-7">Pseudocode</button>
+                            <button class="code-tab" data-tab="python-7">Python</button>
+                        </div>
+                        
+                        <div class="code-container">
+                            <div class="code-content active" id="pseudocode-7">
+                                <div class="pseudocode">
+BEGIN ShuffleOutfits(outfits)
+    n = LENGTH(outfits)
+    
+    FOR i = n-1 DOWNTO 1
+        j = RANDOM INTEGER BETWEEN 0 AND i
+        SWAP outfits[i] AND outfits[j]
+    END FOR
+    
+    RETURN outfits
+END ShuffleOutfits
+                                </div>
+                            </div>
+                            <div class="code-content" id="python-7">
+                                <div class="python-code">
+import random
+
+def shuffle_outfits(outfits):
+    shuffled = outfits.copy()
+    n = len(shuffled)
+    
+    for i in range(n-1, 0, -1):
+        j = random.randint(0, i)
+        shuffled[i], shuffled[j] = shuffled[j], shuffled[i]
+        
+    return shuffled
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="algorithm-card">
+                    <div class="card-header">
+                        <i class="fas fa-file"></i>
+                        <h3>Pagination Algorithm</h3>
+                    </div>
+                    <div class="card-body">  
+                        <div class="code-tabs">
+                            <button class="code-tab active" data-tab="pseudocode-8">Pseudocode</button>
+                            <button class="code-tab" data-tab="python-8">Python</button>
+                        </div>
+                        
+                        <div class="code-container">
+                            <div class="code-content active" id="pseudocode-8">
+                                <div class="pseudocode">
+BEGIN PaginateOutfits(outfits, page, itemsPerPage)
+    startIndex = (page - 1) * itemsPerPage
+    endIndex = startIndex + itemsPerPage
+    
+    IF startIndex >= LENGTH(outfits)
+        RETURN []
+    END IF
+    
+    IF endIndex > LENGTH(outfits)
+        endIndex = LENGTH(outfits)
+    END IF
+    
+    pageOutfits = outfits[startIndex:endIndex]
+    RETURN pageOutfits
+END PaginateOutfits
+                                </div>
+                            </div>
+                            <div class="code-content" id="python-8">
+                                <div class="python-code">
+def paginate_outfits(outfits, page, items_per_page):
+    start_index = (page - 1) * items_per_page
+    end_index = start_index + items_per_page
+    
+    if start_index >= len(outfits):
+        return []
+        
+    if end_index > len(outfits):
+        end_index = len(outfits)
+        
+    return outfits[start_index:end_index]
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="algorithm-card">
+                    <div class="card-header">
+                        <i class="fas fa-copy"></i>
+                        <h3>Duplicate Check</h3>
+                    </div>
+                    <div class="card-body">    
+                        <div class="code-tabs">
+                            <button class="code-tab active" data-tab="pseudocode-9">Pseudocode</button>
+                            <button class="code-tab" data-tab="python-9">Python</button>
+                        </div>
+                        
+                        <div class="code-container">
+                            <div class="code-content active" id="pseudocode-9">
+                                <div class="pseudocode">
+BEGIN FindDuplicates(outfits)
+    seen = {}
+    duplicates = []
+    
+    FOR EACH outfit IN outfits
+        key = outfit.title + JOIN(outfit.tags)
+        
+        IF key IN seen
+            ADD outfit TO duplicates
+        ELSE
+            seen[key] = True
+        END IF
+    END FOR
+    
+    RETURN duplicates
+END FindDuplicates
+                                </div>
+                            </div>
+                            <div class="code-content" id="python-9">
+                                <div class="python-code">
+def find_duplicates(outfits):
+    seen = set()
+    duplicates = []
+    
+    for outfit in outfits:
+        key = outfit['title'] + ''.join(outfit['tags'])
+        
+        if key in seen:
+            duplicates.append(outfit)
+        else:
+            seen.add(key)
+            
+    return duplicates
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="algorithm-card">
+                    <div class="card-header">
+                        <i class="fas fa-layer-group"></i>
+                        <h3>Array Operations</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="code-tabs">
+                            <button class="code-tab active" data-tab="pseudocode-10">Pseudocode</button>
+                            <button class="code-tab" data-tab="python-10">Python</button>
+                        </div>
+                        
+                        <div class="code-container">
+                            <div class="code-content active" id="pseudocode-10">
+                                <div class="pseudocode">
+BEGIN ArrayOperations(outfits)
+    // Add new outfit
+    newOutfit = CREATE new outfit
+    APPEND newOutfit TO outfits
+    
+    // Remove outfit by ID
+    FOR i = 0 TO LENGTH(outfits)-1
+        IF outfits[i].id == targetId
+            REMOVE outfits[i]
+            BREAK
+        END IF
+    END FOR
+    
+    // Find outfit by ID
+    FOR EACH outfit IN outfits
+        IF outfit.id == searchId
+            RETURN outfit
+        END IF
+    END FOR
+    
+    // Update outfit rating
+    FOR EACH outfit IN outfits
+        IF outfit.id == updateId
+            outfit.rating = newRating
+        END IF
+    END FOR
+    
+    RETURN outfits
+END ArrayOperations
+                                </div>
+                            </div>
+                            <div class="code-content" id="python-10">
+                                <div class="python-code">
+def array_operations(outfits):
+    # Add new outfit
+    new_outfit = {
+        'id': len(outfits) + 1,
+        'title': 'New Outfit',
+        'rating': 4.0,
+        'season': 'All',
+        'tags': ['new', 'casual'],
+        'views': 0
+    }
+    outfits.append(new_outfit)
+    
+    # Remove outfit by ID (example: remove ID 2)
+    outfits = [outfit for outfit in outfits if outfit['id'] != 2]
+    
+    # Find outfit by ID (example: find ID 3)
+    found = None
+    for outfit in outfits:
+        if outfit['id'] == 3:
+            found = outfit
+            break
+            
+    # Update outfit rating (example: update ID 1 to 5.0)
+    for outfit in outfits:
+        if outfit['id'] == 1:
+            outfit['rating'] = 5.0
+            
+    return outfits, found
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="logo">StyleInspire</div>
+                <p>Your go-to destination for fashion inspiration and algorithm implementations</p>
+                <ul class="footer-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="casual.html">Casual</a></li>
+                    <li><a href="vintage.html">Vintage</a></li>
+                    <li><a href="streetwear.html">Streetwear</a></li>
+                    <li><a href="formal.html">Formal</a></li>
+                    <li><a href="algorithm.html">Algorithms</a></li>
+                </ul>
+                <p>&copy; 2025 StyleInspire. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.querySelectorAll('.code-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                const card = tab.closest('.algorithm-card');
+                const tabId = tab.getAttribute('data-tab');
+                
+                card.querySelectorAll('.code-tab').forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                
+                card.querySelectorAll('.code-content').forEach(content => content.classList.remove('active'));
+                document.getElementById(tabId).classList.add('active');
+            });
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+        });
+    </script>
+</body>
+</html>

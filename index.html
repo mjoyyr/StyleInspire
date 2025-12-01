@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StyleInspire - Outfit Ideas</title>
+    <style>
+        :root {
+            --primary: #6d5d6e;
+            --secondary: #4f4557;
+            --accent: #f4eee0;
+            --light: #f8f5f1;
+            --dark: #393646;
+            --algorithm-color: #2c5530;
+            --data-structure-color: #1e3a5f;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: var(--accent);
+            padding: 1rem 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            margin-left: auto;
+        }
+        
+        .nav-links li {
+            margin-left: 1.5rem;
+        }
+        
+        .nav-links a {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 0.5rem 0.8rem;
+            border-radius: 4px;
+        }
+        
+        .nav-links a:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        .nav-links a.algorithm-link {
+            background-color: var(--algorithm-color);
+        }
+        
+        .nav-links a.data-link {
+            background-color: var(--data-structure-color);
+        }
+        
+        .hero {
+            background: url('https://images.unsplash.com/photo-1490481651871-ab68de25d43d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80') no-repeat center center/cover;
+            height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            padding: 0 2rem;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--primary);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            background-color: var(--secondary);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .categories {
+            padding: 4rem 0;
+            background-color: white;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--secondary);
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background-color: var(--primary);
+            margin: 0.5rem auto;
+        }
+        
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .category-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .category-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .category-img {
+            height: 200px;
+            width: 100%;
+            object-fit: cover;
+        }
+        
+        .category-content {
+            padding: 1.5rem;
+        }
+        
+        .category-content h3 {
+            margin-bottom: 0.5rem;
+            color: var(--secondary);
+        }
+        
+        .algorithms {
+            padding: 4rem 0;
+            background: linear-gradient(135deg, var(--algorithm-color), #3a7d44);
+            color: white;
+        }
+        
+        .algorithms .section-title {
+            color: white;
+        }
+        
+        .algorithms .section-title::after {
+            background-color: var(--accent);
+        }
+        
+        .algorithm-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .algorithm-card {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .algorithm-card h3 {
+            color: var(--accent);
+            margin-bottom: 1rem;
+            border-bottom: 2px solid var(--accent);
+            padding-bottom: 0.5rem;
+        }
+        
+        .data-structures {
+            padding: 4rem 0;
+            background: linear-gradient(135deg, var(--data-structure-color), #2c5282);
+            color: white;
+        }
+        
+        .data-structures .section-title {
+            color: white;
+        }
+        
+        .data-structures .section-title::after {
+            background-color: var(--accent);
+        }
+        
+        .ds-tabs {
+            display: flex;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+            justify-content: center;
+        }
+        
+        .ds-tab {
+            padding: 0.8rem 1.5rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--accent);
+            transition: all 0.3s ease;
+        }
+        
+        .ds-tab.active {
+            color: white;
+            border-bottom: 3px solid var(--accent);
+        }
+        
+        .ds-content {
+            display: none;
+        }
+        
+        .ds-content.active {
+            display: block;
+        }
+        
+        .code-block {
+            background-color: #1a1a1a;
+            color: #f8f8f2;
+            padding: 1.5rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        footer {
+            background-color: var(--secondary);
+            color: var(--accent);
+            padding: 2rem 0;
+            text-align: center;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .footer-links {
+            display: flex;
+            list-style: none;
+            margin: 1.5rem 0;
+        }
+        
+        .footer-links li {
+            margin: 0 1rem;
+        }
+        
+        .footer-links a {
+            color: var(--accent);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .ds-tabs {
+                justify-content: flex-start;
+                overflow-x: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">StyleInspire</div>
+                <ul class="nav-links">
+                    <li><a href="casual.html">Casual</a></li>
+                    <li><a href="vintage.html">Vintage</a></li>
+                    <li><a href="streetwear.html">Streetwear</a></li>
+                    <li><a href="formal.html">Formal</a></li>
+                    <li><a href="algorithm.html" class="algorithm-link">Algorithms</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Discover Your Perfect Style</h1>
+            <p>Find inspiration for every occasion with our curated outfit ideas</p>
+            <a href="#categories" class="btn">Explore Styles</a>
+        </div>
+    </section>
+
+    <section id="categories" class="categories">
+        <div class="container">
+            <h2 class="section-title">Style Categories</h2>
+            <div class="category-grid">
+                <div class="category-card">
+                    <img src=https://i.imgur.com/Ccszxtn.jpeg alt="Casual Style" class="category-img">
+                    <div class="category-content">
+                        <h3>Casual</h3>
+                        <p>Comfortable and relaxed outfits perfect for everyday wear.</p>
+                        <a href="casual.html" class="btn" style="margin-top: 1rem;">Explore</a>
+                    </div>
+                </div>
+                <div class="category-card">
+                    <img src=https://i.imgur.com/dtm6sRf.jpeg alt="Vintage Style" class="category-img">
+                    <div class="category-content">
+                        <h3>Vintage</h3>
+                        <p>Timeless pieces with a nostalgic charm from past eras.</p>
+                        <a href="vintage.html" class="btn" style="margin-top: 1rem;">Explore</a>
+                    </div>
+                </div>
+                <div class="category-card">
+                    <img src=https://i.imgur.com/wbyBNY9.jpeg alt="Streetwear Style" class="category-img">
+                    <div class="category-content">
+                        <h3>Streetwear</h3>
+                        <p>Urban-inspired fashion with a focus on comfort and style.</p>
+                        <a href="streetwear.html" class="btn" style="margin-top: 1rem;">Explore</a>
+                    </div>
+                </div>
+                <div class="category-card">
+                    <img src=https://i.imgur.com/1jaMpZ5.jpeg alt="Formal Style" class="category-img">
+                    <div class="category-content">
+                        <h3>Formal</h3>
+                        <p>Elegant and sophisticated outfits for special occasions.</p>
+                        <a href="formal.html" class="btn" style="margin-top: 1rem;">Explore</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="logo">StyleInspire</div>
+                <p>Your go-to destination for fashion inspiration and outfit ideas</p>
+                <ul class="footer-links">
+                    <li><a href="casual.html">Casual</a></li>
+                    <li><a href="vintage.html">Vintage</a></li>
+                    <li><a href="streetwear.html">Streetwear</a></li>
+                    <li><a href="formal.html">Formal</a></li>
+                    <li><a href="algorithm.html">Algorithms</a></li>
+                </ul>
+                <p>&copy; 2025 StyleInspire. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const tabs = document.querySelectorAll('.ds-tab');
+            const contents = document.querySelectorAll('.ds-content');
+            
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    tabs.forEach(t => t.classList.remove('active'));
+                    contents.forEach(c => c.classList.remove('active'));
+                    
+                    tab.classList.add('active');
+                    
+                    const tabId = tab.getAttribute('data-tab');
+                    document.getElementById(`${tabId}-content`).classList.add('active');
+                });
+            });
+            
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if(targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if(targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

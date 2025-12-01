@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Structures - StyleInspire</title>
+    <style>
+        :root {
+            --primary: #6d5d6e;
+            --secondary: #4f4557;
+            --accent: #f4eee0;
+            --light: #f8f5f1;
+            --dark: #393646;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: var(--accent);
+            padding: 1rem 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 1.5rem;
+        }
+        
+        .nav-links a {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 0.5rem 0.8rem;
+            border-radius: 4px;
+        }
+        
+        .nav-links a:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        .nav-links a.active {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        .page-hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
+                        url('https://images.unsplash.com/photo-1558769132-cb1aea458c5e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80') no-repeat center center/cover;
+            height: 40vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            margin-bottom: 3rem;
+        }
+        
+        .page-hero h1 {
+            font-size: 3rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .data-structures {
+            padding: 2rem 0 4rem;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--secondary);
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background-color: var(--primary);
+            margin: 0.5rem auto;
+        }
+        
+        .ds-tabs {
+            display: flex;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid #ddd;
+            justify-content: center;
+        }
+        
+        .ds-tab {
+            padding: 1rem 2rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--dark);
+            transition: all 0.3s ease;
+            font-size: 1.1rem;
+        }
+        
+        .ds-tab.active {
+            color: var(--primary);
+            border-bottom: 3px solid var(--primary);
+        }
+        
+        .ds-content {
+            display: none;
+        }
+        
+        .ds-content.active {
+            display: block;
+        }
+        
+        .code-block {
+            background-color: #2d2d2d;
+            color: #f8f8f2;
+            padding: 1.5rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin-bottom: 1.5rem;
+        }
+        
+        .ds-card {
+            background-color: white;
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .ds-card h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            border-bottom: 2px solid var(--accent);
+            padding-bottom: 0.5rem;
+        }
+        
+        footer {
+            background-color: var(--secondary);
+            color: var(--accent);
+            padding: 2rem 0;
+            text-align: center;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .footer-links {
+            display: flex;
+            list-style: none;
+            margin: 1.5rem 0;
+        }
+        
+        .footer-links li {
+            margin: 0 1rem;
+        }
+        
+        .footer-links a {
+            color: var(--accent);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .page-hero h1 {
+                font-size: 2rem;
+            }
+            
+            .ds-tab {
+                padding: 0.8rem 1rem;
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">StyleInspire</div>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="casual.html">Casual</a></li>
+                    <li><a href="vintage.html">Vintage</a></li>
+                    <li><a href="streetwear.html">Streetwear</a></li>
+                    <li><a href="formal.html">Formal</a></li>
+                    <li><a href="algorithm.html">Algorithms</a></li>
+                    <li><a href="data.html" class="active">Data Structures</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="page-hero">
+        <div class="container">
+            <h1>Data Structures Implementation</h1>
+        </div>
+    </section>
+
+    <section class="data-structures">
+        <div class="container">
+            <h2 class="section-title">Data Structures for Fashion Applications</h2>
+            
+            <div class="ds-tabs">
+                <button class="ds-tab active" data-tab="array">Arrays</button>
+                <button class="ds-tab" data-tab="stacks">Stacks</button>
+                <button class="ds-tab" data-tab="queues">Queues</button>
+                <button class="ds-tab" data-tab="trees">Trees</button>
+            </div>
+            
+            <!-- Arrays Content -->
+            <div class="ds-content active" id="array-content">
+                <div class="ds-card">
+                    <h3>Array Implementation for Outfit Storage</h3>
+                    <p>Using arrays to store and manage outfit collections with basic operations.</p>
+                    
+                    <div class="code-block">
+                        <pre><code># Python implementation of Arrays for outfit storage
+class OutfitArray:
+    def __init__(self):
+        self.outfits = []
+    
+    def add_outfit(self, outfit):
+        self.outfits.append(outfit)
+    
+    def remove_outfit(self, index):
+        if 0 <= index < len(self.outfits):
+            return self.outfits.pop(index)
+        return None
+    
+    def get_outfit(self, index):
+        if 0 <= index < len(self.outfits):
+            return self.outfits[index]
+        return None
+    
+    def display_all(self):
+        for i, outfit in enumerate(self.outfits):
+            print(f"{i+1}. {outfit}")
+    
+    def search_outfit(self, keyword):
+        results = []
+        for outfit in self.outfits:
+            if keyword.lower() in outfit.lower():
+                results.append(outfit)
+        return results
+
+# Example usage
+outfit_db = OutfitArray()
+outfit_db.add_outfit("Casual: Denim jeans with white t-shirt")
+outfit_db.add_outfit("Vintage: Floral dress with cardigan")
+outfit_db.add_outfit("Streetwear: Hoodie with ripped jeans and sneakers")
+outfit_db.add_outfit("Formal: Navy suit with white shirt")
+
+print("All outfits:")
+outfit_db.display_all()
+
+print("\nSearch results for 'casual':")
+casual_outfits = outfit_db.search_outfit("casual")
+for outfit in casual_outfits:
+    print(outfit)</code></pre>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Stacks Content -->
+            <div class="ds-content" id="stacks-content">
+                <div class="ds-card">
+                    <h3>Stack Implementation for Outfit History</h3>
+                    <p>Using stacks to manage outfit browsing history with LIFO operations.</p>
+                    
+                    <div class="code-block">
+                        <pre><code># Python implementation of Stack for outfit browsing history
+class OutfitStack:
+    def __init__(self):
+        self.stack = []
+    
+    def push(self, outfit):
+        self.stack.append(outfit)
+    
+    def pop(self):
+        if not self.is_empty():
+            return self.stack.pop()
+        return "Stack is empty"
+    
+    def peek(self):
+        if not self.is_empty():
+            return self.stack[-1]
+        return "Stack is empty"
+    
+    def is_empty(self):
+        return len(self.stack) == 0
+    
+    def size(self):
+        return len(self.stack)
+    
+    def display(self):
+        print("Outfit browsing history (most recent first):")
+        for i in range(len(self.stack)-1, -1, -1):
+            print(f"{len(self.stack)-i}. {self.stack[i]}")
+
+# Example usage
+outfit_history = OutfitStack()
+outfit_history.push("Casual outfit: Jeans and t-shirt")
+outfit_history.push("Vintage outfit: Floral dress")
+outfit_history.push("Streetwear outfit: Hoodie and sneakers")
+outfit_history.push("Formal outfit: Suit and tie")
+
+outfit_history.display()
+
+print(f"\nCurrent outfit: {outfit_history.peek()}")
+print(f"Going back to previous outfit: {outfit_history.pop()}")
+print(f"Now viewing: {outfit_history.peek()}")</code></pre>
+                    </div>
+                </div>
+                
+                <div class="ds-card">
+                    <h3>Expression Conversion (Infix, Prefix, Postfix)</h3>
+                    <p>Stack-based implementation for expression conversion algorithms.</p>
+                    
+                    <div class="code-block">
+                        <pre><code># Python implementation for expression conversion using stacks
+def infix_to_postfix(expression):
+    precedence = {'+': 1, '-': 1, '*': 2, '/': 2, '^': 3}
+    stack = []
+    output = []
+    
+    for char in expression:
+        if char.isalnum():  # Operand
+            output.append(char)
+        elif char == '(':
+            stack.append(char)
+        elif char == ')':
+            while stack and stack[-1] != '(':
+                output.append(stack.pop())
+            stack.pop()  # Remove '('
+        else:  # Operator
+            while (stack and stack[-1] != '(' and 
+                   precedence.get(char, 0) <= precedence.get(stack[-1], 0)):
+                output.append(stack.pop())
+            stack.append(char)
+    
+    while stack:
+        output.append(stack.pop())
+    
+    return ''.join(output)
+
+def infix_to_prefix(expression):
+    # Reverse the expression
+    reversed_expr = expression[::-1]
+    
+    # Swap parentheses
+    reversed_expr = reversed_expr.replace('(', 'temp').replace(')', '(').replace('temp', ')')
+    
+    # Convert to postfix
+    postfix = infix_to_postfix(reversed_expr)
+    
+    # Reverse the postfix to get prefix
+    prefix = postfix[::-1]
+    return prefix
+
+# Example usage
+infix_expr = "a+b*(c^d-e)^(f+g*h)-i"
+postfix_expr = infix_to_postfix(infix_expr)
+prefix_expr = infix_to_prefix(infix_expr)
+
+print(f"Infix: {infix_expr}")
+print(f"Postfix: {postfix_expr}")
+print(f"Prefix: {prefix_expr}")</code></pre>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Queues Content -->
+            <div class="ds-content" id="queues-content">
+                <div class="ds-card">
+                    <h3>Queue Implementation for Outfit Suggestions</h3>
+                    <p>Using queues to manage outfit suggestions with FIFO operations.</p>
+                    
+                    <div class="code-block">
+                        <pre><code># Python implementation of Queue for outfit suggestion system
+class OutfitQueue:
+    def __init__(self):
+        self.queue = []
+    
+    def enqueue(self, outfit):
+        self.queue.append(outfit)
+    
+    def dequeue(self):
+        if not self.is_empty():
+            return self.queue.pop(0)
+        return "Queue is empty"
+    
+    def front(self):
+        if not self.is_empty():
+            return self.queue[0]
+        return "Queue is empty"
+    
+    def is_empty(self):
+        return len(self.queue) == 0
+    
+    def size(self):
+        return len(self.queue)
+    
+    def display(self):
+        print("Outfit suggestions queue:")
+        for i, outfit in enumerate(self.queue):
+            print(f"{i+1}. {outfit}")
+
+# Example usage
+suggestion_queue = OutfitQueue()
+suggestion_queue.enqueue("Casual: Denim jacket with khaki pants")
+suggestion_queue.enqueue("Vintage: High-waisted trousers with blouse")
+suggestion_queue.enqueue("Streetwear: Graphic tee with cargo pants")
+suggestion_queue.enqueue("Formal: Blazer with dress pants")
+
+suggestion_queue.display()
+
+print(f"\nNext suggestion: {suggestion_queue.front()}")
+print(f"Processing suggestion: {suggestion_queue.dequeue()}")
+print(f"Next in queue: {suggestion_queue.front()}")</code></pre>
+                    </div>
+                </div>
+                
+                <div class="ds-card">
+                    <h3>Circular Queue for Style Rotation</h3>
+                    <p>Circular queue implementation for rotating style recommendations.</p>
+                    
+                    <div class="code-block">
+                        <pre><code># Circular Queue implementation for style rotation
+class CircularQueue:
+    def __init__(self, capacity):
+        self.capacity = capacity
+        self.queue = [None] * capacity
+        self.front = self.rear = -1
+    
+    def is_empty(self):
+        return self.front == -1
+    
+    def is_full(self):
+        return (self.rear + 1) % self.capacity == self.front
+    
+    def enqueue(self, item):
+        if self.is_full():
+            print("Queue is full")
+            return
+        
+        if self.is_empty():
+            self.front = self.rear = 0
+        else:
+            self.rear = (self.rear + 1) % self.capacity
+        
+        self.queue[self.rear] = item
+    
+    def dequeue(self):
+        if self.is_empty():
+            print("Queue is empty")
+            return None
+        
+        item = self.queue[self.front]
+        
+        if self.front == self.rear:
+            self.front = self.rear = -1
+        else:
+            self.front = (self.front + 1) % self.capacity
+        
+        return item
+    
+    def display(self):
+        if self.is_empty():
+            print("Queue is empty")
+            return
+        
+        print("Circular Queue contents:")
+        i = self.front
+        while True:
+            print(self.queue[i])
+            if i == self.rear:
+                break
+            i = (i + 1) % self.capacity
+
+# Example usage
+style_rotation = CircularQueue(5)
+style_rotation.enqueue("Casual Style")
+style_rotation.enqueue("Vintage Style")
+style_rotation.enqueue("Streetwear Style")
+style_rotation.enqueue("Formal Style")
+style_rotation.enqueue("Business Casual")
+
+style_rotation.display()
+
+print(f"\nProcessing: {style_rotation.dequeue()}")
+style_rotation.enqueue("Athleisure Style")
+style_rotation.display()</code></pre>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Trees Content -->
+            <div class="ds-content" id="trees-content">
+                <div class="ds-card">
+                    <h3>Tree Implementation for Style Categories</h3>
+                    <p>Binary tree implementation for organizing and traversing style categories.</p>
+                    
+                    <div class="code-block">
+                        <pre><code># Python implementation of Binary Tree for style categorization
+class StyleNode:
+    def __init__(self, style):
+        self.style = style
+        self.left = None
+        self.right = None
+
+class StyleTree:
+    def __init__(self):
+        self.root = None
+    
+    def insert(self, style):
+        if self.root is None:
+            self.root = StyleNode(style)
+        else:
+            self._insert_recursive(self.root, style)
+    
+    def _insert_recursive(self, node, style):
+        if style < node.style:
+            if node.left is None:
+                node.left = StyleNode(style)
+            else:
+                self._insert_recursive(node.left, style)
+        else:
+            if node.right is None:
+                node.right = StyleNode(style)
+            else:
+                self._insert_recursive(node.right, style)
+    
+    def inorder_traversal(self, node=None):
+        if node is None:
+            node = self.root
+        result = []
+        if node.left:
+            result.extend(self.inorder_traversal(node.left))
+        result.append(node.style)
+        if node.right:
+            result.extend(self.inorder_traversal(node.right))
+        return result
+    
+    def preorder_traversal(self, node=None):
+        if node is None:
+            node = self.root
+        result = [node.style]
+        if node.left:
+            result.extend(self.preorder_traversal(node.left))
+        if node.right:
+            result.extend(self.preorder_traversal(node.right))
+        return result
+    
+    def postorder_traversal(self, node=None):
+        if node is None:
+            node = self.root
+        result = []
+        if node.left:
+            result.extend(self.postorder_traversal(node.left))
+        if node.right:
+            result.extend(self.postorder_traversal(node.right))
+        result.append(node.style)
+        return result
+
+# Example usage
+style_tree = StyleTree()
+styles = ["Formal", "Casual", "Vintage", "Streetwear", "Business Casual", "Athleisure"]
+
+for style in styles:
+    style_tree.insert(style)
+
+print("Inorder traversal (alphabetical order):")
+print(style_tree.inorder_traversal())
+
+print("\nPreorder traversal:")
+print(style_tree.preorder_traversal())
+
+print("\nPostorder traversal:")
+print(style_tree.postorder_traversal())</code></pre>
+                    </div>
+                </div>
+                
+                <div class="ds-card">
+                    <h3>Binary Search Tree for Outfit Search</h3>
+                    <p>BST implementation for efficient searching of outfits by category.</p>
+                    
+                    <div class="code-block">
+                        <pre><code># Binary Search Tree implementation for outfit search
+class OutfitNode:
+    def __init__(self, category, outfits):
+        self.category = category
+        self.outfits = outfits
+        self.left = None
+        self.right = None
+
+class OutfitBST:
+    def __init__(self):
+        self.root = None
+    
+    def insert(self, category, outfits):
+        if self.root is None:
+            self.root = OutfitNode(category, outfits)
+        else:
+            self._insert_recursive(self.root, category, outfits)
+    
+    def _insert_recursive(self, node, category, outfits):
+        if category < node.category:
+            if node.left is None:
+                node.left = OutfitNode(category, outfits)
+            else:
+                self._insert_recursive(node.left, category, outfits)
+        else:
+            if node.right is None:
+                node.right = OutfitNode(category, outfits)
+            else:
+                self._insert_recursive(node.right, category, outfits)
+    
+    def search(self, category):
+        return self._search_recursive(self.root, category)
+    
+    def _search_recursive(self, node, category):
+        if node is None or node.category == category:
+            return node
+        if category < node.category:
+            return self._search_recursive(node.left, category)
+        return self._search_recursive(node.right, category)
+    
+    def display_categories(self):
+        categories = self._inorder_traversal(self.root)
+        print("Available categories:")
+        for category in categories:
+            print(f"- {category}")
+
+    def _inorder_traversal(self, node):
+        if node is None:
+            return []
+        result = []
+        result.extend(self._inorder_traversal(node.left))
+        result.append(node.category)
+        result.extend(self._inorder_traversal(node.right))
+        return result
+
+# Example usage
+outfit_bst = OutfitBST()
+outfit_bst.insert("Casual", ["Jeans and T-shirt", "Sweater and Chinos"])
+outfit_bst.insert("Formal", ["Suit and Tie", "Cocktail Dress"])
+outfit_bst.insert("Vintage", ["Floral Dress", "High-waisted Pants"])
+outfit_bst.insert("Streetwear", ["Hoodie and Jeans", "Graphic Tee and Cargos"])
+
+outfit_bst.display_categories()
+
+# Search for a specific category
+casual_node = outfit_bst.search("Casual")
+if casual_node:
+    print(f"\nCasual outfits: {casual_node.outfits}")</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="logo">StyleInspire</div>
+                <p>Your go-to destination for fashion inspiration and outfit ideas</p>
+                <ul class="footer-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="casual.html">Casual</a></li>
+                    <li><a href="vintage.html">Vintage</a></li>
+                    <li><a href="streetwear.html">Streetwear</a></li>
+                    <li><a href="formal.html">Formal</a></li>
+                    <li><a href="algorithm.html">Algorithms</a></li>
+                    <li><a href="data.html">Data Structures</a></li>
+                </ul>
+                <p>&copy; 2023 StyleInspire. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Tab functionality for data structures section
+        document.addEventListener('DOMContentLoaded', function() {
+            const tabs = document.querySelectorAll('.ds-tab');
+            const contents = document.querySelectorAll('.ds-content');
+            
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    // Remove active class from all tabs and contents
+                    tabs.forEach(t => t.classList.remove('active'));
+                    contents.forEach(c => c.classList.remove('active'));
+                    
+                    // Add active class to clicked tab
+                    tab.classList.add('active');
+                    
+                    // Show corresponding content
+                    const tabId = tab.getAttribute('data-tab');
+                    document.getElementById(`${tabId}-content`).classList.add('active');
+                });
+            });
+        });
+    </script>
+</body>
+</html>

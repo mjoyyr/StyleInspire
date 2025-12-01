@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Casual Outfit Ideas - StyleInspire</title>
+    <style>
+        :root {
+            --primary: #6d5d6e;
+            --secondary: #4f4557;
+            --accent: #f4eee0;
+            --light: #f8f5f1;
+            --dark: #393646;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: var(--accent);
+            padding: 1rem 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            align-items: center;
+        }
+        
+        .nav-links li {
+            margin-left: 1.5rem;
+        }
+        
+        .nav-links a {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 0.5rem 0.8rem;
+            border-radius: 4px;
+        }
+        
+        .nav-links a:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        .nav-links a.active {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        .page-hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
+                        url('https://images.unsplash.com/photo-1552374196-1ab2a1c593e8?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80') no-repeat center center/cover;
+            height: 40vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            margin-bottom: 3rem;
+        }
+        
+        .page-hero h1 {
+            font-size: 3rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .gallery {
+            padding: 2rem 0 4rem;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--secondary);
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background-color: var(--primary);
+            margin: 0.5rem auto;
+        }
+        
+        .controls-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .search-container {
+            position: relative;
+            flex: 1;
+            max-width: 400px;
+        }
+        
+        .search-bar {
+            padding: 0.8rem 1rem;
+            padding-right: 2.5rem;
+            border: 2px solid var(--primary);
+            border-radius: 25px;
+            background: white;
+            color: var(--dark);
+            width: 100%;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .search-bar::placeholder {
+            color: var(--secondary);
+            opacity: 0.7;
+        }
+        
+        .search-bar:focus {
+            outline: none;
+            border-color: var(--secondary);
+            box-shadow: 0 0 0 3px rgba(109, 93, 110, 0.1);
+        }
+        
+        .search-btn {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: var(--primary);
+            cursor: pointer;
+            font-size: 1.1rem;
+        }
+
+        /* Filter Dropdown Styles */
+        .filter-container {
+            position: relative;
+            display: inline-block;
+        }
+
+        .filter-dropdown {
+            padding: 0.8rem 1rem;
+            border: 2px solid var(--primary);
+            border-radius: 8px;
+            background: white;
+            color: var(--dark);
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            min-width: 150px;
+            text-align: left;
+            position: relative;
+        }
+
+        .filter-dropdown:focus {
+            outline: none;
+            border-color: var(--secondary);
+            box-shadow: 0 0 0 3px rgba(109, 93, 110, 0.1);
+        }
+
+        .filter-dropdown::after {
+            content: '▼';
+            font-size: 0.8rem;
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .filter-options {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: white;
+            border: 2px solid var(--primary);
+            border-radius: 8px;
+            margin-top: 4px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        .filter-options.show {
+            display: block;
+        }
+
+        .filter-option {
+            padding: 0.8rem 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid #f0f0f0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .filter-option:last-child {
+            border-bottom: none;
+        }
+
+        .filter-option:hover {
+            background-color: var(--accent);
+        }
+
+        .filter-option input {
+            margin: 0;
+        }
+
+        .rating-stars {
+            color: #ffc107;
+            font-size: 0.9rem;
+        }
+
+        .filter-label {
+            font-weight: 600;
+            color: var(--secondary);
+            margin-right: 0.5rem;
+        }
+        
+        .sort-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .sort-label {
+            font-weight: 600;
+            color: var(--secondary);
+        }
+        
+        .sort-select {
+            padding: 0.8rem 1rem;
+            border: 2px solid var(--primary);
+            border-radius: 8px;
+            background: white;
+            color: var(--dark);
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .sort-select:focus {
+            outline: none;
+            border-color: var(--secondary);
+            box-shadow: 0 0 0 3px rgba(109, 93, 110, 0.1);
+        }
+        
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+        
+        .outfit-card {
+            background-color: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+        }
+        
+        .outfit-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .outfit-img {
+            height: 250px;
+            width: 100%;
+            object-fit: cover;
+            background-color: #e0e0e0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #888;
+            font-size: 1.1rem;
+        }
+        
+        .outfit-info {
+            padding: 1.5rem;
+        }
+        
+        .outfit-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--secondary);
+        }
+        
+        .rating {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .stars {
+            color: #ffc107;
+            font-size: 1.1rem;
+        }
+        
+        .rating-value {
+            font-weight: 600;
+            color: var(--primary);
+        }
+        
+        .outfit-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+        
+        .tag {
+            background: var(--accent);
+            color: var(--secondary);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        
+        .no-results {
+            text-align: center;
+            padding: 3rem;
+            color: var(--secondary);
+            font-size: 1.1rem;
+            display: none;
+            grid-column: 1 / -1;
+        }
+
+        /* New Badge Styles */
+        .outfit-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            z-index: 2;
+            color: white;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+
+        .trending-badge {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+        }
+
+        .recommended-badge {
+            background: linear-gradient(135deg, #27ae60, #219a52);
+        }
+
+        .featured-badge {
+            background: linear-gradient(135deg, #f39c12, #e67e22);
+        }
+        
+        footer {
+            background-color: var(--secondary);
+            color: var(--accent);
+            padding: 2rem 0;
+            text-align: center;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .footer-links {
+            display: flex;
+            list-style: none;
+            margin: 1.5rem 0;
+        }
+        
+        .footer-links li {
+            margin: 0 1rem;
+        }
+        
+        .footer-links a {
+            color: var(--accent);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .page-hero h1 {
+                font-size: 2rem;
+            }
+            
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+            
+            .controls-container {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .search-container {
+                max-width: 100%;
+            }
+            
+            .sort-container {
+                justify-content: space-between;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .sort-container {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">StyleInspire</div>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="casual.html" class="active">Casual</a></li>
+                    <li><a href="vintage.html">Vintage</a></li>
+                    <li><a href="streetwear.html">Streetwear</a></li>
+                    <li><a href="formal.html">Formal</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="page-hero">
+        <div class="container">
+            <h1>Casual Outfit Ideas</h1>
+        </div>
+    </section>
+
+    <section class="gallery">
+        <div class="container">
+            <h2 class="section-title">Casual Style Inspiration</h2>
+            
+            <div class="controls-container">
+                <div class="search-container">
+                    <input type="text" class="search-bar" placeholder="Search here..." id="searchInput">
+                    <button class="search-btn">🔍</button>
+                </div>
+                
+                <div class="sort-container">
+                    <span class="filter-label">Filter by:</span>
+                    <div class="filter-container">
+                        <button class="filter-dropdown" id="filterDropdown">Rating</button>
+                        <div class="filter-options" id="filterOptions">
+                            <label class="filter-option">
+                                <input type="checkbox" name="rating" value="4.5">
+                                <span class="rating-stars">★★★★★</span>
+                                <span>4.5+ Stars</span>
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" name="rating" value="4.0">
+                                <span class="rating-stars">★★★★☆</span>
+                                <span>4.0+ Stars</span>
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" name="rating" value="3.5">
+                                <span class="rating-stars">★★★☆☆</span>
+                                <span>3.5+ Stars</span>
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" name="rating" value="3.0">
+                                <span class="rating-stars">★★☆☆☆</span>
+                                <span>3.0+ Stars</span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <span class="sort-label">Sort by:</span>
+                    <select class="sort-select" id="sortSelect">
+                        <option value="default">Default Order</option>
+                        <option value="rating-desc">Highest Rated</option>
+                        <option value="rating-asc">Lowest Rated</option>
+                        <option value="title-asc">Title A-Z</option>
+                        <option value="title-desc">Title Z-A</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="gallery-grid" id="outfitGrid">
+                <div class="outfit-card" data-tags="jeans tshirt casual summer comfortable" data-rating="4.8" data-title="Classic Jeans & Tee">
+                    <div class="outfit-badge trending-badge">🔥 Trending</div>
+                  <img src=https://i.imgur.com/5TRi1VX.jpeg alt="Classic jeans and t-shirt outfit" class="outfit-img">
+                    <div class="outfit-info">
+                        <h3 class="outfit-title">Classic Jeans & Tee</h3>
+                        <div class="rating">
+                            <div class="stars">★★★★★</div>
+                            <span class="rating-value">4.8</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="outfit-card" data-tags="cardigan" data-rating="4.5" data-title="cardigan">
+                    <div class="outfit-badge recommended-badge">💫 Recommended</div>
+                    <img src=https://i.imgur.com/DymW6oI.jpeg alt="cardigan" class="outfit-img">
+                    <div class="outfit-info">
+                        <h3 class="outfit-title">Cardigan and Jeans</h3>
+                        <div class="rating">
+                            <div class="stars">★★★★☆</div>
+                            <span class="rating-value">4.5</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="outfit-card" data-tags="sweater jeans autumn casual cozy" data-rating="4.7" data-title="Cozy Autumn Sweater">
+                    <div class="outfit-badge trending-badge">🔥 Trending</div>
+                    <img src=https://i.imgur.com/YutjlAP.jpeg alt="Sweater and jeans autumn outfit" class="outfit-img">
+                    <div class="outfit-info">
+                        <h3 class="outfit-title">Cardigan and Black Shirt</h3>
+                        <div class="rating">
+                            <div class="stars">★★★★★</div>
+                            <span class="rating-value">4.7</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="outfit-card" data-tags="shorts tshirt summer casual beach" data-rating="4.3" data-title="Summer Beach Outfit">
+                    <img src=https://i.imgur.com/KIR0mcj.jpeg alt="Summer shorts and t-shirt" class="outfit-img">
+                    <div class="outfit-info">
+                        <h3 class="outfit-title">Casual Street Style</h3>
+                        <div class="rating">
+                            <div class="stars">★★★★☆</div>
+                            <span class="rating-value">4.3</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="outfit-card" data-tags="black and jeans" data-rating="4.6" data-title="jeans">
+                    <div class="outfit-badge recommended-badge">💫 Recommended</div>
+                    <img src=https://i.imgur.com/8FwFiB0.jpeg alt="Casual shirt with jeans" class="outfit-img">
+                    <div class="outfit-info">
+                        <h3 class="outfit-title">Black and Jeans</h3>
+                        <div class="rating">
+                            <div class="stars">★★★★★</div>
+                            <span class="rating-value">4.6</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="outfit-card" data-tags="Menswear" data-rating="4.4" data-title="Casual Menswear">
+                    <img src=https://i.imgur.com/uYVdwtn.jpeg alt="Casual Menswear" class="outfit-img">
+                    <div class="outfit-info">
+                        <h3 class="outfit-title">Casual Menswear</h3>
+                        <div class="rating">
+                            <div class="stars">★★★★☆</div>
+                            <span class="rating-value">4.4</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="outfit-card" data-tags="classic" data-rating="4.9" data-title="Classic">
+                    <div class="outfit-badge trending-badge">🔥 Trending</div>
+                    <div class="outfit-badge recommended-badge" style="top: 3rem;">💫 Recommended</div>
+                    <img src=https://i.imgur.com/herHhWo.jpeg alt="Classic" class="outfit-img">
+                    <div class="outfit-info">
+                        <h3 class="outfit-title">Classic</h3>
+                        <div class="rating">
+                            <div class="stars">★★★★★</div>
+                            <span class="rating-value">4.9</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="outfit-card" data-tags="Black" data-rating="4.2" data-title="Black">
+                    <img src=https://i.imgur.com/Tg3YVkq.jpeg alt="Black" class="outfit-img">
+                    <div class="outfit-info">
+                        <h3 class="outfit-title">Black Outfit</h3>
+                        <div class="rating">
+                            <div class="stars">★★★★☆</div>
+                            <span class="rating-value">4.2</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="no-results" id="noResults">
+                    No outfits found matching your search. Try different keywords.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="logo">StyleInspire</div>
+                <p>Your go-to destination for fashion inspiration and outfit ideas</p>
+                <ul class="footer-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="casual.html">Casual</a></li>
+                    <li><a href="vintage.html">Vintage</a></li>
+                    <li><a href="streetwear.html">Streetwear</a></li>
+                    <li><a href="formal.html">Formal</a></li>
+                </ul>
+                <p>&copy; 2025 StyleInspire. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchInput = document.getElementById('searchInput');
+            const searchBtn = document.querySelector('.search-btn');
+            const sortSelect = document.getElementById('sortSelect');
+            const outfitGrid = document.getElementById('outfitGrid');
+            const outfitCards = Array.from(document.querySelectorAll('.outfit-card'));
+            const noResults = document.getElementById('noResults');
+            const filterDropdown = document.getElementById('filterDropdown');
+            const filterOptions = document.getElementById('filterOptions');
+            const ratingFilters = document.querySelectorAll('input[name="rating"]');
+
+            // Store original order for default sorting
+            const originalOrder = [...outfitCards];
+            let currentRatingFilters = new Set();
+
+            // Filter dropdown functionality
+            filterDropdown.addEventListener('click', function() {
+                filterOptions.classList.toggle('show');
+            });
+
+            // Close dropdown when clicking outside
+            document.addEventListener('click', function(event) {
+                if (!filterDropdown.contains(event.target) && !filterOptions.contains(event.target)) {
+                    filterOptions.classList.remove('show');
+                }
+            });
+
+            // Rating filter functionality
+            ratingFilters.forEach(filter => {
+                filter.addEventListener('change', function() {
+                    if (this.checked) {
+                        currentRatingFilters.add(parseFloat(this.value));
+                    } else {
+                        currentRatingFilters.delete(parseFloat(this.value));
+                    }
+                    applyFilters();
+                });
+            });
+
+            function performSearch() {
+                applyFilters();
+            }
+
+            function applyFilters() {
+                const searchTerm = searchInput.value.toLowerCase().trim();
+                let hasResults = false;
+
+                outfitCards.forEach(card => {
+                    const tags = card.getAttribute('data-tags').toLowerCase();
+                    const title = card.getAttribute('data-title').toLowerCase();
+                    const rating = parseFloat(card.getAttribute('data-rating'));
+                    
+                    // Check search term
+                    const searchMatch = searchTerm === '' || 
+                                      tags.includes(searchTerm) || 
+                                      title.includes(searchTerm);
+                    
+                    // Check rating filters
+                    let ratingMatch = currentRatingFilters.size === 0;
+                    if (currentRatingFilters.size > 0) {
+                        ratingMatch = Array.from(currentRatingFilters).some(minRating => rating >= minRating);
+                    }
+                    
+                    if (searchMatch && ratingMatch) {
+                        card.style.display = 'block';
+                        hasResults = true;
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+
+                applySorting();
+
+                if (!hasResults) {
+                    noResults.style.display = 'block';
+                } else {
+                    noResults.style.display = 'none';
+                }
+            }
+
+            function applySorting() {
+                const sortValue = sortSelect.value;
+                const visibleCards = outfitCards.filter(card => card.style.display !== 'none');
+                
+                switch(sortValue) {
+                    case 'rating-desc':
+                        visibleCards.sort((a, b) => parseFloat(b.getAttribute('data-rating')) - parseFloat(a.getAttribute('data-rating')));
+                        break;
+                    case 'rating-asc':
+                        visibleCards.sort((a, b) => parseFloat(a.getAttribute('data-rating')) - parseFloat(b.getAttribute('data-rating')));
+                        break;
+                    case 'title-asc':
+                        visibleCards.sort((a, b) => a.getAttribute('data-title').localeCompare(b.getAttribute('data-title')));
+                        break;
+                    case 'title-desc':
+                        visibleCards.sort((a, b) => b.getAttribute('data-title').localeCompare(a.getAttribute('data-title')));
+                        break;
+                    case 'default':
+                    default:
+                        visibleCards.sort((a, b) => originalOrder.indexOf(a) - originalOrder.indexOf(b));
+                        break;
+                }
+
+                visibleCards.forEach(card => {
+                    outfitGrid.appendChild(card);
+                });
+            }
+
+            searchBtn.addEventListener('click', performSearch);
+            sortSelect.addEventListener('change', applySorting);
+
+            searchInput.addEventListener('keyup', function(event) {
+                if (event.key === 'Enter') {
+                    performSearch();
+                }
+            });
+
+            searchInput.addEventListener('input', function() {
+                if (this.value === '') {
+                    performSearch();
+                }
+            });
+
+            applySorting();
+        });
+    </script>
+</body>
+</html>
